@@ -1,0 +1,9 @@
+[
+  { "name": "Grocery", "icon": "cart" },
+  { "name": "Entertainment", "icon": "game-controller" },
+  { "name": "Clothing", "icon": "shirt" },
+  { "name": "Beauty", "icon": "rose" },
+  { "name": "Health", "icon": "heart" },
+  { "name": "Education", "icon": "graduation-cap" },
+  { "name": "Other", "icon": "ellipsis-h" }
+]
