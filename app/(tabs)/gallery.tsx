@@ -19,7 +19,7 @@ export default function Gallery() {
 
   return (
     <SafeAreaProvider>
-      <SafeAreaView style={{ height: 800, flexDirection: "row" }}>
+      <SafeAreaView style={{ flexDirection: "row" }}>
         <ScrollView>
           <Modal
             animationType="slide"

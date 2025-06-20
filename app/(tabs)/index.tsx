@@ -43,7 +43,7 @@ export default function HomeScreen() {
 
   return (
     <SafeAreaProvider>
-      <SafeAreaView style={{ height: 800, flexDirection: "row" }}>
+      <SafeAreaView style={{ flexDirection: "row" }}>
         <ScrollView>
           <View style={styles.hero}>
             <Text style={styles.text1}>You have spent</Text>
