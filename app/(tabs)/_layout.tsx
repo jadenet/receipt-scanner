@@ -1,7 +1,5 @@
 import { Tabs } from "expo-router";
-import Ionicons from '@expo/vector-icons/Ionicons';
-import { View } from "react-native";
-View
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 export default function TabLayout() {
   return (
@@ -10,7 +8,7 @@ export default function TabLayout() {
         animation: "shift",
         headerShown: false,
         tabBarActiveTintColor: "#323232",
-        tabBarStyle: { elevation: 0, borderTopWidth: 0,  },
+        tabBarStyle: { elevation: 0, borderTopWidth: 0 },
       }}
     >
       <Tabs.Screen

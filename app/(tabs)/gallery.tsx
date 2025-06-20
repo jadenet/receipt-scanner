@@ -5,7 +5,6 @@ import {
   Modal,
   Pressable,
   Text,
-  Button,
 } from "react-native";
 import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
 import receipts from "@/assets/receipts.json";
@@ -89,7 +88,10 @@ export default function Gallery() {
                   >
                     Total Spent: $
                     {selectedReceiptInfo.items
-                      .reduce((total, item) => total + item.price, 0)
+                      .reduce(
+                        (total: number, item: any) => total + item.price,
+                        0
+                      )
                       .toFixed(2)}
                   </Text>
                 )}
@@ -123,14 +125,22 @@ export default function Gallery() {
                           <Text style={{ fontWeight: "bold", fontSize: 20 }}>
                             $
                             {selectedReceiptInfo.items
-                              .filter((item) => item.category === category.name)
-                              .reduce((total, item) => total + item.price, 0)
+                              .filter(
+                                (item: any) => item.category === category.name
+                              )
+                              .reduce(
+                                (total: number, item: any) =>
+                                  total + item.price,
+                                0
+                              )
                               .toFixed(2)}
                           </Text>
                         </View>
                         {selectedReceiptInfo.items
-                          .filter((item) => item.category === category.name)
-                          .map((item, itemIndex) => (
+                          .filter(
+                            (item: any) => item.category === category.name
+                          )
+                          .map((item: any, itemIndex: number) => (
                             <View
                               key={itemIndex}
                               style={{

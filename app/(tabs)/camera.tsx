@@ -1,4 +1,3 @@
 export default function Camera() {
-  return (<></>
-    );
+  return <></>;
 }
