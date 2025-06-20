@@ -14,7 +14,7 @@ export default function CategorySpentCard({ categoryInfo }) {
 const styles = StyleSheet.create({
   container: {
     width: "47%",
-    height: 200,
+    height: 180,
     flexDirection: "column",
     backgroundColor: "#ECECEC",
     alignItems: "center",
