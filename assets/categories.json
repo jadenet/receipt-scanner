@@ -1,9 +1,12 @@
 [
-  { "name": "Grocery", "icon": "cart" },
-  { "name": "Entertainment", "icon": "game-controller" },
-  { "name": "Clothing", "icon": "shirt" },
-  { "name": "Beauty", "icon": "rose" },
-  { "name": "Health", "icon": "heart" },
-  { "name": "Education", "icon": "graduation-cap" },
-  { "name": "Other", "icon": "ellipsis-h" }
+  { "name": "Fruits", "icon": "bowling-ball" },
+  { "name": "Vegetables", "icon": "leaf" },
+  { "name": "Grains", "icon": "menu" },
+  { "name": "Legumes", "icon": "apps" },
+  { "name": "Meat", "icon": "fish" },
+  { "name": "Dairy", "icon": "pint" },
+  { "name": "Seasonings", "icon": "sparkles" },
+  { "name": "Snacks", "icon": "pizza" },
+  { "name": "Drinks", "icon": "wine" },
+  { "name": "Other", "icon": "fast-food" }
 ]

@@ -12,15 +12,6 @@ export default function TabLayout() {
       }}
     >
       <Tabs.Screen
-        name="camera"
-        options={{
-          title: "Camera",
-          tabBarIcon: ({ color }) => (
-            <Ionicons size={28} name="camera" color="#323232" />
-          ),
-        }}
-      />
-      <Tabs.Screen
         name="index"
         options={{
           title: "Home",
@@ -35,6 +26,15 @@ export default function TabLayout() {
           title: "Gallery",
           tabBarIcon: ({ color }) => (
             <Ionicons size={28} name="image" color="#323232" />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="camera"
+        options={{
+          title: "Camera",
+          tabBarIcon: ({ color }) => (
+            <Ionicons size={28} name="camera" color="#323232" />
           ),
         }}
       />

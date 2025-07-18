@@ -7,14 +7,23 @@ import {
   Text,
 } from "react-native";
 import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
-import receipts from "@/assets/receipts.json";
+import {
+  getReceiptList,
+  removeFromReceiptList,
+} from "@/components/ReceiptList";
 import categories from "@/assets/categories.json";
 import { useState } from "react";
 import { Image } from "expo-image";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
+// TODO: auto upate the list when a new receipt is added
+
 export default function Gallery() {
   const [selectedReceiptInfo, setSelectedReceiptInfo]: any = useState(null);
+  function onReceiptListChange() {
+    setReceipts(getReceiptList());
+  }
+  const [receipts, setReceipts] = useState(getReceiptList(onReceiptListChange));
 
   return (
     <SafeAreaProvider>
@@ -39,14 +48,22 @@ export default function Gallery() {
                       <Ionicons size={40} name="arrow-back" color="#323232" />
                     </Pressable>
                     <Text style={{ fontSize: 16, fontWeight: "semibold" }}>
-                      {new Date(Date.now()).toLocaleDateString("en-US", {
-                        year: "numeric",
-                        month: "long",
-                        day: "numeric",
-                      })}
+                      {new Date(selectedReceiptInfo.date).toLocaleDateString(
+                        "en-US",
+                        {
+                          year: "numeric",
+                          month: "long",
+                          day: "numeric",
+                        }
+                      )}
                     </Text>
                     <Pressable
-                      onPress={() => console.log("Delete photo")}
+                      onPress={() => {
+                        removeFromReceiptList(
+                          receipts.indexOf(selectedReceiptInfo)
+                        );
+                        setSelectedReceiptInfo(null);
+                      }}
                       style={{
                         backgroundColor: "#FF5C5C",
                         paddingHorizontal: 20,
@@ -61,13 +78,13 @@ export default function Gallery() {
                     </Pressable>
                   </View>
                 )}
-
+                
                 {selectedReceiptInfo && (
                   <Image
                     source={{
                       width: 300,
                       height: 400,
-                      uri: selectedReceiptInfo.src,
+                      uri: selectedReceiptInfo.uri,
                     }}
                     style={{
                       width: "100%",
@@ -77,7 +94,6 @@ export default function Gallery() {
                     }}
                   />
                 )}
-
                 {selectedReceiptInfo && (
                   <Text
                     style={{
@@ -95,7 +111,6 @@ export default function Gallery() {
                       .toFixed(2)}
                   </Text>
                 )}
-
                 <View
                   style={{ width: "100%", flexDirection: "column", gap: 10 }}
                 >
@@ -160,25 +175,25 @@ export default function Gallery() {
             </ScrollView>
           </Modal>
           <View style={styles.cardsContainer}>
-            {receipts.map((receipt, index) => (
+            {receipts.length > 0 ?receipts.map((receipt, index) => (
               <Pressable
                 style={styles.container}
                 onPress={() => setSelectedReceiptInfo(receipt)}
                 key={index}
               >
                 <Image
-                  source={{ width: 170, height: 170, uri: receipt.src }}
+                  source={{ width: 170, height: 170, uri: receipt.uri }}
                   style={styles.image}
                 />
                 <Text style={styles.text1}>
-                  {new Date(Date.now()).toLocaleDateString("en-US", {
+                  {new Date(receipt.date).toLocaleDateString("en-US", {
                     year: "numeric",
                     month: "long",
                     day: "numeric",
-                  })}
+                  })} 
                 </Text>
               </Pressable>
-            ))}
+            )) : <Text style={styles.text2}>There are no receipts scanned... yet</Text>}
           </View>
         </ScrollView>
       </SafeAreaView>
@@ -227,4 +242,11 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
   },
+  text2: {
+    fontSize: 16,
+    color: "#123D46",
+    textAlign: "center",
+    width: "100%",
+    marginTop: 60,
+  }
 });
