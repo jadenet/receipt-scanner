@@ -1,21 +1,21 @@
-import React, { useRef, useState, useEffect } from "react";
+import { addToReceiptList } from "@/components/ReceiptList";
+import { CameraView, useCameraPermissions } from "expo-camera";
+import { isLoading } from "expo-font";
+import React, { useEffect, useRef, useState } from "react";
 import {
-  View,
+  ActivityIndicator,
   Button,
   StyleSheet,
-  Image,
   Text,
   TouchableOpacity,
+  View,
 } from "react-native";
-import { useCameraPermissions, CameraView } from "expo-camera";
-import { addToReceiptList } from "@/components/ReceiptList";
 
 export default function Camera() {
   const cameraRef = useRef(null);
   const [permission, requestPermission] = useCameraPermissions();
 
-  if (!permission) return <View />;
-  if (!permission.granted)
+  if (!permission || !permission.granted) {
     return (
       <View style={styles.container}>
         <Text style={styles.message}>
@@ -24,16 +24,14 @@ export default function Camera() {
         <Button onPress={requestPermission} title="grant permission" />
       </View>
     );
+  }
 
   function savePicture(photo: any) {
-    // TODO: redirect to gallery page - possible zoom into photo
-
     const newReceipt = {
       uri: photo.uri,
       date: Date.now(),
       items: [],
     };
-
     addToReceiptList(newReceipt);
   }
 
@@ -41,24 +39,32 @@ export default function Camera() {
     if (cameraRef.current) {
       await cameraRef.current.takePictureAsync({
         shutterSound: false,
-        onPictureSaved: savePicture
+        onPictureSaved: savePicture,
       });
     }
   };
 
-  // TODO: fix camera crash
-
-  return (
-    <View style={styles.container}>
-      <CameraView style={styles.camera} facing={false} ref={cameraRef}>
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.button} onPress={takePicture}>
-            <Text style={styles.text}>Take photo</Text>
-          </TouchableOpacity>
-        </View>
-      </CameraView>
-    </View>
-  );
+  if (!cameraRef.current) {
+    return (
+      <View style={styles.container}>
+        <CameraView
+          style={styles.camera}
+          facing="back"
+          ref={cameraRef}
+          onCameraReady={() => {
+            setLoading(false);
+            console.log("here");
+          }}
+        >
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity style={styles.button} onPress={takePicture}>
+              <Text style={styles.text}>Take photo</Text>
+            </TouchableOpacity>
+          </View>
+        </CameraView>
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
