@@ -28,6 +28,14 @@ export default function HomeScreen() {
 
   const categorySpent: any = {};
 
+  const itemsOfReceipt = selectedCategoryInfo
+    ? receipts.flatMap((receipt: any) =>
+        receipt.items.filter(
+          (item: any) => item.category === selectedCategoryInfo.name
+        )
+      )
+    : [];
+
   categories().forEach((category) => {
     categorySpent[category.name] = receipts.reduce(
       (total: number, receipt: any) => {
@@ -71,62 +79,48 @@ export default function HomeScreen() {
               )}
 
               {selectedCategoryInfo && (
-                <View style={{ alignItems: "center", flexDirection: "row", justifyContent: "center", gap: 30, marginTop: 50 }}>
-                <Image source={selectedCategoryInfo.icon} style={{ width: 100, height: 100 }}
-                  />
-                <Text
+                <View
                   style={{
-                    fontWeight: "bold",
-                    fontSize: 20,
-                    marginBottom: 20,
+                    alignItems: "center",
+                    flexDirection: "row",
+                    justifyContent: "center",
+                    gap: 10,
+                    marginTop: 50,
+                    marginBottom: 50,
                   }}
                 >
-                  {selectedCategoryInfo.name} Total: $0
-                </Text>
-              </View>
+                  <Image
+                    source={selectedCategoryInfo.icon}
+                    style={{ width: 100, height: 100 }}
+                  />
+                  <Text
+                    style={{
+                      fontWeight: "bold",
+                      fontSize: 20,
+                    }}
+                  >
+                    {selectedCategoryInfo.name} Total: ${categorySpent[selectedCategoryInfo.name].toFixed(2)}
+                  </Text>
+                </View>
               )}
 
-              <View style={{ width: "100%", flexDirection: "column", gap: 10 }}>
+              <View style={{ width: "100%", flexDirection: "column" }}>
                 {selectedCategoryInfo &&
-                  categories().map((category, index) => (
+                  itemsOfReceipt.map((item: any, itemIndex: number) => (
                     <View
+                      key={itemIndex}
                       style={{
-                        width: "100%",
+                        flexDirection: "row",
+                        alignItems: "center",
+                        justifyContent: "space-between",
                         backgroundColor: "#ECECEC",
                         padding: 20,
                         borderRadius: 10,
+                        marginBottom: 10,
                       }}
-                      key={index}
                     >
-                      <View
-                        style={{
-                          flexDirection: "row",
-                          alignItems: "center",
-                          justifyContent: "space-between",
-                        }}
-                      >
-                        <Text style={{ fontWeight: "semibold", fontSize: 20 }}>
-                          {category.name}
-                        </Text>
-                        <Text style={{ fontWeight: "bold", fontSize: 20 }}>
-                          $0
-                        </Text>
-                      </View>
-                      {/* {selectedCategoryInfo.items
-                        .filter((item: any) => item.category === category.name)
-                        .map((item: any, itemIndex: number) => (
-                          <View
-                            key={itemIndex}
-                            style={{
-                              flexDirection: "row",
-                              alignItems: "center",
-                              justifyContent: "space-between",
-                            }}
-                          >
-                            <Text>{item.name}</Text>
-                            <Text>${item.price.toFixed(2)}</Text>
-                          </View>
-                        ))} */}
+                      <Text>{item.name}</Text>
+                      <Text>${item.price.toFixed(2)}</Text>
                     </View>
                   ))}
               </View>
@@ -135,7 +129,9 @@ export default function HomeScreen() {
         </Modal>
         <View style={styles.hero}>
           <Text style={styles.text1}>You have spent</Text>
-          <Text style={styles.text2}>${totalSpent}</Text>
+          <Text style={styles.text2}>
+            ${Math.round(totalSpent * 100) / 100}
+          </Text>
         </View>
 
         <View style={styles.cardContainer}>
