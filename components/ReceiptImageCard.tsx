@@ -1,5 +1,5 @@
-import { Text, View, StyleSheet } from "react-native";
 import { Image } from "expo-image";
+import { StyleSheet, Text, View } from "react-native";
 
 export default function ReceiptImageCard({ receiptInfo }: any) {
   return (

@@ -116,7 +116,7 @@ export default function Gallery() {
                       <View
                         style={{
                           width: "100%",
-                          backgroundColor: "#ECECEC",
+                          backgroundColor: "#eaf2f4ff",
                           padding: 20,
                           borderRadius: 10,
                         }}

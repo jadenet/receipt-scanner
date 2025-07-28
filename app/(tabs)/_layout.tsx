@@ -7,7 +7,7 @@ export default function TabLayout() {
       screenOptions={{
         animation: "shift",
         headerShown: false,
-        tabBarActiveTintColor: "#323232",
+        tabBarActiveTintColor: "#4f2f5ff",
         tabBarStyle: { elevation: 0, borderTopWidth: 0 },
       }}
     >
