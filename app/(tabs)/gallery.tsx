@@ -1,29 +1,26 @@
-import {
-  StyleSheet,
-  ScrollView,
-  View,
-  Modal,
-  Pressable,
-  Text,
-} from "react-native";
-import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
+import categories from "@/assets/categories";
 import {
   getReceiptList,
   removeFromReceiptList,
 } from "@/components/ReceiptList";
-import categories from "@/assets/categories.json";
-import { useState } from "react";
-import { Image } from "expo-image";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { Image } from "expo-image";
+import { useState } from "react";
+import {
+  Modal,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 
 // TODO: auto upate the list when a new receipt is added
 
 export default function Gallery() {
   const [selectedReceiptInfo, setSelectedReceiptInfo]: any = useState(null);
-  function onReceiptListChange() {
-    setReceipts(getReceiptList());
-  }
-  const [receipts, setReceipts] = useState(getReceiptList(onReceiptListChange));
+  const [receipts, setReceipts] = useState(getReceiptList());
 
   return (
     <SafeAreaProvider>

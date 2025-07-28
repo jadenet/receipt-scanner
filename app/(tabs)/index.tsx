@@ -72,7 +72,6 @@ export default function HomeScreen() {
 
               {selectedCategoryInfo && (
                 <View style={{ alignItems: "center", flexDirection: "row", justifyContent: "center", gap: 30, marginTop: 50 }}>
-                {/* <Ionicons size={100} name={selectedCategoryInfo.icon} color="#323232" /> */}
                 <Image source={selectedCategoryInfo.icon} style={{ width: 100, height: 100 }}
                   />
                 <Text
