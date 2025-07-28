@@ -1,27 +1,17 @@
 import { Text, View, StyleSheet } from "react-native";
-import Ionicons from "@expo/vector-icons/Ionicons";
+import { Image } from "expo-image";
 
 export default function CategorySpentCard({ categoryInfo, spent, total }: any) {
   return (
-    <View style={styles.container}>
-      <Ionicons size={65} name={categoryInfo.icon} color="#323232" />
+    <>
+      <Image source={categoryInfo.icon} style={{ width: 65, height: 65 }} />
       <Text style={styles.text1}>{categoryInfo.name}</Text>
       <Text style={styles.text2}>${spent || 0}</Text>
-    </View>
+    </>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    width: "47%",
-    height: 180,
-    flexDirection: "column",
-    backgroundColor: "#ECECEC",
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: 10,
-    gap: 2,
-  },
   text1: {
     fontSize: 12,
   },
