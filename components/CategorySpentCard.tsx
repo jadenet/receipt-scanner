@@ -6,7 +6,7 @@ export default function CategorySpentCard({ categoryInfo, spent, total }: any) {
     <>
       <Image source={categoryInfo.icon} style={{ width: 65, height: 65, marginBottom: 6 }} />
       <Text style={styles.text1}>{categoryInfo.name}</Text>
-      <Text style={styles.text2}>${spent || 0}</Text>
+      <Text style={styles.text2}>${spent && Math.round(spent * 100) / 100 || 0}</Text>
     </>
   );
 }

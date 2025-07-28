@@ -112,7 +112,7 @@ export default function Gallery() {
                   style={{ width: "100%", flexDirection: "column", gap: 10 }}
                 >
                   {selectedReceiptInfo &&
-                    categories.map((category, index) => (
+                    categories().map((category, index) => (
                       <View
                         style={{
                           width: "100%",
