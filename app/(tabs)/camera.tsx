@@ -1,9 +1,7 @@
 import { addToReceiptList } from "@/components/ReceiptList";
 import { CameraView, useCameraPermissions } from "expo-camera";
-import { isLoading } from "expo-font";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef } from "react";
 import {
-  ActivityIndicator,
   Button,
   StyleSheet,
   Text,
@@ -51,10 +49,6 @@ export default function Camera() {
           style={styles.camera}
           facing="back"
           ref={cameraRef}
-          onCameraReady={() => {
-            setLoading(false);
-            console.log("here");
-          }}
         >
           <View style={styles.buttonContainer}>
             <TouchableOpacity style={styles.button} onPress={takePicture}>
